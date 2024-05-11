@@ -160,9 +160,15 @@ class Player3 extends Phaser.Scene {
 
     create() {
         let my = this.my;
-
+        if (!my.sprite.player) {
+            // Create player only if it doesn't exist
+            my.sprite.player = this.add.sprite(this.playerX, this.playerY, "tanAlien");
+            // Other player initialization code...
+        } else {
+            // If the player already exists, just reposition it
+            my.sprite.player.setPosition(this.playerX, this.playerY);
+        }
         //player sprite initialization
-        my.sprite.player = this.add.sprite(this.playerX, this.playerY,"tanAlien");
         my.sprite.player.setScale(.5);
 
         //movement keys
@@ -1047,7 +1053,6 @@ class Player3 extends Phaser.Scene {
     restart() {
         let my = this.my;
         // Reset player starting location
-        this.player.destroy;
         // Reset player movement variables
         this.moveLeft = null;
         this.moveRight = null;
